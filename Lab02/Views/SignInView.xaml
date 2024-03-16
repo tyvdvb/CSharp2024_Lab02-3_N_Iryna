@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="Lab02.Views.SignInView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Lab02.Views"
+             xmlns:viewmodels="clr-namespace:Lab02.ViewModels" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="500" IsEnabled="{Binding IsEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+
+    <Grid Background="#FF8BB2E8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.2*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="1.2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Name="TbSignIn" Grid.Row="0" Grid.ColumnSpan="2" Text="Sign In" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontFamily="Comic Sans MS" ></TextBlock>
+
+        <TextBlock  Grid.Row="1" Grid.Column="0" Text="First Name: " HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White" Margin="50,0,0,0" FontFamily="Comic Sans MS"></TextBlock>
+        <TextBox Name="TbFirstName" Grid.Row="1" Grid.Column="1" Margin ="20" Text="{Binding FirstName, Mode=TwoWay}"></TextBox>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Second Name: " HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White" Margin="50,0,0,0" FontFamily="Comic Sans MS"></TextBlock>
+        <TextBox Name="TbLastName" Grid.Row="2"  Grid.Column="1" Margin ="20" Text="{Binding LastName, Mode=TwoWay}"></TextBox>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="E-mail: " HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White" Margin="50,0,0,0" FontFamily="Comic Sans MS"></TextBlock>
+        <TextBox Name="TbEmail" Grid.Row="3" Grid.Column="1" Margin ="20" Text="{Binding Email, Mode=TwoWay}"></TextBox>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Birth Date: " HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White" Margin="50,0,0,0" FontFamily="Comic Sans MS"></TextBlock>
+        <DatePicker Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" SelectedDate="{Binding DateOfBirth, Mode=TwoWay}" Margin="20"></DatePicker>
+
+        <Button Grid.ColumnSpan="2" Grid.Row="5" Content="Proceed" FontSize="18" FontWeight="Bold" Width="200" Height="40"  Command="{Binding ProceedCommand}" Background="#FF83B974" Foreground="White"></Button>
+
+    </Grid>
+</UserControl>
