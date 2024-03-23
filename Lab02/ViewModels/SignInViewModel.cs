@@ -9,14 +9,16 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Lab02.ViewModels
 {
-    internal class SignInViewModel
+    internal class SignInViewModel : INotifyPropertyChanged
     {
         #region Fields
 
         private bool _isEnabled = true;
+        private bool _isProcessing = false;
         private RelayCommand<object> _proceedCommand;
         private Action _goToPersonInfoView;
 
@@ -28,26 +30,76 @@ namespace Lab02.ViewModels
         #endregion
         #region Properties
 
-        public string FirstName { get; set; }
+        private string _firstName;
+        private string _lastName;
+        private string _email;
+        
 
-        public string LastName { get; set; }
 
-        public string Email { get; set; }
+
 
         public DateTime DateOfBirth { get; set; } = DateTime.Today;
 
-        public bool IsEnabled 
-        { 
-            get 
-            { 
-                return _isEnabled; 
-            }
+
+        public string FirstName
+        {
+            get { return _firstName; }
             set
             {
-                _isEnabled = value;
+                _firstName = value;
                 NotifyPropertyChanged();
+                CommandManager.InvalidateRequerySuggested();
             }
         }
+
+        public string LastName
+        {
+            get { return _lastName; }
+            set
+            {
+                _lastName = value;
+                NotifyPropertyChanged();
+                CommandManager.InvalidateRequerySuggested();
+            }
+        }
+
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                _email = value;
+                NotifyPropertyChanged();
+                CommandManager.InvalidateRequerySuggested();
+            }
+        }
+
+        public bool IsEnabled
+        {
+            get { return _isEnabled; }
+            set
+            {
+                if (_isEnabled != value)
+                {
+                    _isEnabled = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public bool IsProcessing
+        {
+            get { return _isProcessing; }
+            set
+            {
+                if (_isProcessing != value)
+                {
+                    _isProcessing = value;
+                    NotifyPropertyChanged();
+                    NotifyPropertyChanged(nameof(IsEnabled)); 
+                }
+            }
+        }
+
 
         public RelayCommand<object> ProceedCommand =>
             _proceedCommand ??= new RelayCommand<object>(_ => Proceed(), CanExecute);
@@ -65,17 +117,13 @@ namespace Lab02.ViewModels
         internal async void Proceed()
         {
             IsEnabled = false;
+            IsProcessing = true;
 
             try
             {
                 await Task.Run(() => { Thread.Sleep(2000); });
 
-                if (DateOfBirth > DateTime.Today || DateOfBirth < DateTime.Today.AddYears(-135))
-                {
-                    MessageBox.Show("Invalid birthday.");
-                    IsEnabled = true;
-                    return;
-                }
+               
 
                 var person = new Person(FirstName, LastName, Email, DateOfBirth);
 
@@ -99,6 +147,9 @@ namespace Lab02.ViewModels
             finally
             {
                 IsEnabled = true;
+                IsProcessing = false;
+                CommandManager.InvalidateRequerySuggested();
+
             }
 
         }
