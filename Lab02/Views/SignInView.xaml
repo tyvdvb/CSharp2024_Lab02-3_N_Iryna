@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Lab02.Views"
              xmlns:viewmodels="clr-namespace:Lab02.ViewModels" 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="500" IsEnabled="{Binding IsEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+             d:DesignHeight="450" d:DesignWidth="500"  IsEnabled="{Binding IsEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
 
     <Grid Background="#FF8BB2E8">
         <Grid.RowDefinitions>
@@ -24,13 +24,13 @@
         <TextBlock Name="TbSignIn" Grid.Row="0" Grid.ColumnSpan="2" Text="Sign In" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontFamily="Comic Sans MS" ></TextBlock>
 
         <TextBlock  Grid.Row="1" Grid.Column="0" Text="First Name: " HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White" Margin="50,0,0,0" FontFamily="Comic Sans MS"></TextBlock>
-        <TextBox Name="TbFirstName" Grid.Row="1" Grid.Column="1" Margin ="20" Text="{Binding FirstName, Mode=TwoWay}" IsEnabled="{Binding IsEnabled}"></TextBox>
+        <TextBox Name="TbFirstName" Grid.Row="1" Grid.Column="1" Margin ="20" Text="{Binding FirstName, Mode=TwoWay}" IsEnabled="{Binding IsEnabled}" ></TextBox>
 
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Second Name: " HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White" Margin="50,0,0,0" FontFamily="Comic Sans MS"></TextBlock>
-        <TextBox Name="TbLastName" Grid.Row="2"  Grid.Column="1" Margin ="20" Text="{Binding LastName, Mode=TwoWay}" IsEnabled="{Binding IsEnabled}"></TextBox>
+        <TextBox Name="TbLastName" Grid.Row="2"  Grid.Column="1" Margin ="20" Text="{Binding LastName, Mode=TwoWay}" IsEnabled="{Binding IsEnabled}" ></TextBox>
 
         <TextBlock Grid.Row="3" Grid.Column="0" Text="E-mail: " HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White" Margin="50,0,0,0" FontFamily="Comic Sans MS"></TextBlock>
-        <TextBox Name="TbEmail" Grid.Row="3" Grid.Column="1" Margin ="20" Text="{Binding Email, Mode=TwoWay}" IsEnabled="{Binding IsEnabled}"></TextBox>
+        <TextBox Name="TbEmail" Grid.Row="3" Grid.Column="1" Margin ="20" Text="{Binding Email, Mode=TwoWay}" IsEnabled="{Binding IsEnabled}" ></TextBox>
 
         <TextBlock Grid.Row="4" Grid.Column="0" Text="Birth Date: " HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Foreground="White" Margin="50,0,0,0" FontFamily="Comic Sans MS"></TextBlock>
         <DatePicker Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" SelectedDate="{Binding DateOfBirth, Mode=TwoWay}" Margin="20" ></DatePicker>

@@ -1,4 +1,5 @@
-﻿using Lab02.ViewModels;
+﻿using Lab02.Exceptions;
+using Lab02.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,5 +29,9 @@ namespace Lab02.Views
             InitializeComponent();
             DataContext = _viewModel = new SignInViewModel(a);
         }
+
+       
+
+
     }
 }

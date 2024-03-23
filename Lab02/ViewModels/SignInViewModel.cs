@@ -1,4 +1,5 @@
-﻿using Lab02.Models;
+﻿using Lab02.Exceptions;
+using Lab02.Models;
 using Lab02.Tools;
 using Lab1.Tools;
 using System;
@@ -33,12 +34,23 @@ namespace Lab02.ViewModels
         private string _firstName;
         private string _lastName;
         private string _email;
-        
 
 
 
 
-        public DateTime DateOfBirth { get; set; } = DateTime.Today;
+
+        private DateTime? _dateOfBirth;
+
+        public DateTime? DateOfBirth
+        {
+            get { return _dateOfBirth; }
+            set
+            {
+                _dateOfBirth = value;
+                NotifyPropertyChanged();
+                CommandManager.InvalidateRequerySuggested();
+            }
+        }
 
 
         public string FirstName
@@ -111,11 +123,20 @@ namespace Lab02.ViewModels
         {
             return !String.IsNullOrWhiteSpace(FirstName) &&
                    !String.IsNullOrWhiteSpace(LastName) &&
-                   !String.IsNullOrWhiteSpace(Email);
+                   !String.IsNullOrWhiteSpace(Email) &&
+                   DateOfBirth != null;
         }
+
+
+
+
+
 
         internal async void Proceed()
         {
+
+
+
             IsEnabled = false;
             IsProcessing = true;
 
@@ -123,9 +144,20 @@ namespace Lab02.ViewModels
             {
                 await Task.Run(() => { Thread.Sleep(2000); });
 
-               
 
-                var person = new Person(FirstName, LastName, Email, DateOfBirth);
+
+                if (DateOfBirth == null)
+                {
+                    throw new EmptyFieldException("Please specify the birth date.");
+                }
+
+                if (string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName) || string.IsNullOrWhiteSpace(Email))
+                {
+                    throw new EmptyFieldException("Please fill in all required fields.");
+                }
+
+                var person = new Person(FirstName, LastName, Email, (DateTime)DateOfBirth);
+
 
                 if (person.isNotFilled())
                 {
@@ -164,6 +196,8 @@ namespace Lab02.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+       
 
         #endregion
 

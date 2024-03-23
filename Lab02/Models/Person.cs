@@ -102,7 +102,8 @@ namespace Lab02.Models
             if (!IsValidEmail(email))
             {
                 throw new InvalidEmailFormatException();
-            } 
+            }
+          
 
             _isAdult = CalculateAge();
             _isBirthday = CheckBirthday();
